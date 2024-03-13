@@ -2,7 +2,9 @@
   "name": "oidc-test-app",
   "bin": "./index.js",
   "version": "1.0.0",
-  "scripts": {},
+  "scripts": {
+    "release": "release-it"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/masahirompp/oidc-test-app.git"
@@ -15,5 +17,8 @@
     "express-openid-connect": "^2.17.1",
     "morgan": "^1.10.0",
     "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "release-it": "^17.1.1"
   }
 }
