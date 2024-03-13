@@ -1,0 +1,19 @@
+{
+  "name": "oidc-test-app",
+  "bin": "./index.js",
+  "version": "1.0.0",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masahirompp/oidc-test-app.git"
+  },
+  "author": "Masahiro Onohara <masahirompp@gmail.com> (https://github.com/masahirompp)",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.3",
+    "express-openid-connect": "^2.17.1",
+    "morgan": "^1.10.0",
+    "yargs": "^17.7.2"
+  }
+}
