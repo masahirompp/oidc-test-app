@@ -25,7 +25,7 @@ function run({
     auth({
       authRequired: false,
       auth0Logout: false,
-      // idpLogout: true,
+      idpLogout: true,
       authorizationParams: {
         response_type,
         scope,
