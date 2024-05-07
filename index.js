@@ -1,20 +1,22 @@
 #!/usr/bin/env node
 
 const yargs = require("yargs");
+const { custom } = require("openid-client");
 const run = require("./server");
 
 const slicedArgs = process.argv.slice(2); // 最初の2つは受け取った引数ではないので除外
 const argv = yargs(slicedArgs)
-  .option("issuer", {    
+  .option("issuer", {
     demandOption: true,
-    description: "The issuer URL of the OpenID Connect provider. ex. http://localhost:4444",
-    type: "string"
+    description:
+      "The issuer URL of the OpenID Connect provider. ex. http://localhost:4444",
+    type: "string",
   })
-  .option("client_id", {    
+  .option("client_id", {
     demandOption: true,
-    type: "string"
+    type: "string",
   })
-  .option("client_secret", {    
+  .option("client_secret", {
     demandOption: true,
     type: "string",
   })
@@ -30,14 +32,29 @@ const argv = yargs(slicedArgs)
     type: "number",
     default: 8080,
   })
+  .option("header", {
+    type: "string",
+    alias: "H",
+    array: true,
+    description:
+      "HTTP header to include in the request to Issuer. ex. Proxy-Authorization: XXXX",
+  })
   .help().argv;
 
+const headers = (argv.header ?? []).reduce((acc, header) => {
+  const [key, value] = header.split(":");
+  acc[key.trim()] = value.trim();
+  return acc;
+}, {});
+// Set the default HTTP options
+custom.setHttpOptionsDefaults({ headers, timeout: 30000 });
+
 run({
-    response_type: argv.response_type,
-    scope: argv.scope,
-    secret: Math.random().toString(32).substring(2),
-    port: argv.port,
-    issuerBaseURL: argv.issuer,
-    clientID: argv.client_id,
-    clientSecret: argv.client_secret,
-})
+  response_type: argv.response_type,
+  scope: argv.scope,
+  secret: Math.random().toString(32).substring(2),
+  port: argv.port,
+  issuerBaseURL: argv.issuer,
+  clientID: argv.client_id,
+  clientSecret: argv.client_secret,
+});
