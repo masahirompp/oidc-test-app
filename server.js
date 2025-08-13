@@ -13,6 +13,7 @@ function run({
   issuerBaseURL,
   clientID,
   clientSecret,
+  clientAuthMethod,
 }) {
   const app = express();
 
@@ -35,6 +36,7 @@ function run({
       issuerBaseURL,
       clientID,
       clientSecret,
+      clientAuthMethod
     })
   );
 

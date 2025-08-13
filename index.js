@@ -28,6 +28,11 @@ const argv = yargs(slicedArgs)
     type: "string",
     default: "openid offline_access profile email",
   })
+  .option("token_endpoint_auth_method", {
+    type: "string",
+    default: "client_secret_post",
+    choices: ["client_secret_post", "client_secret_basic"],
+  })
   .option("port", {
     type: "number",
     default: 8080,
@@ -57,4 +62,5 @@ run({
   issuerBaseURL: argv.issuer,
   clientID: argv.client_id,
   clientSecret: argv.client_secret,
+  clientAuthMethod: argv.token_endpoint_auth_method
 });
